@@ -1,0 +1,3 @@
+en:
+  site_settings:
+    restore_pm_mentions_enabled: "Allow admin mentions in PM?"
