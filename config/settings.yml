@@ -1,3 +1,4 @@
 plugins:
   restore_pm_mentions_enabled:
     default: true
+    client: true
