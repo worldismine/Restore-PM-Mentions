@@ -1,7 +1,8 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 
 function initWithApi(api) {
-  if (!Discourse.SiteSettings.restore_pm_mentions_enabled) return;
+  const siteSettings = api.container.lookup("site-settings:main");
+  if (!siteSettings.restore_pm_mentions_enabled) return;
 
   api.modifyClass("controller:composer", {
     actions: {

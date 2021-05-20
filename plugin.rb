@@ -1,5 +1,5 @@
 # name: restore-pm-mentions
-# version: 0.3.0
+# version: 0.3.1
 # authors: Muhlis Budi Cahyono (muhlisbc@gmail.com)
 
 enabled_site_setting :restore_pm_mentions_enabled
