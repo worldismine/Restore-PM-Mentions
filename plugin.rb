@@ -1,5 +1,5 @@
 # name: discourse-restore-pm-mentions
-# version: 3.0
+# version: 3.4
 # authors: Muhlis Budi Cahyono (muhlisbc@gmail.com) and richard@communiteq.com
 # url: https://github.com/worldismine/Restore-PM-Mentions
 
