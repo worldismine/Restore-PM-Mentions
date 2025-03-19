@@ -11,14 +11,31 @@ function initWithApi(api) {
   // so we resort to overriding this one and add admins to the list of stuff we've already warned for
   // this effectively suppresses the warning
 
+  // Since Discourse 3.4 that method does not work anymore
+  // it yields "Uncaught (in promise) TypeError: "_warnCannotSeeMention" is read-only"
+  // Luckily enough, a good friend suggested this workaround
+  // "you can try modifying the method before it's used"
+
   api.modifyClass("component:composer-editor", {
     pluginId: "discourse-restore-pm-mentions",
-    _warnCannotSeeMention(...args) {
-      this.warnedCannotSeeMentions.push('admins');
-      this.warnedCannotSeeMentions.push('administrators');
-      return this._super(...args);
+
+    didInsertElement() {
+      this._super(...arguments);
+
+      let originalWarn = this._warnCannotSeeMention.bind(this);
+
+      Object.defineProperty(this, "_warnCannotSeeMention", {
+        value: (...args) => {
+          this.warnedCannotSeeMentions.push("admins");
+          this.warnedCannotSeeMentions.push("administrators");
+          return originalWarn(...args);
+        },
+        writable: false,
+        configurable: true, // Allow future modifications
+      });
     },
   });
+
 
   api.modifyClass("controller:composer", {
     pluginId: "discourse-restore-pm-mentions",
